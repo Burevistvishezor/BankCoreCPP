@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+
+  postgres:
+    image: postgres:16
+
+    container_name: bank-postgres
+
+    restart: always
+
+    environment:
+      POSTGRES_DB: bankdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ../database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+volumes:
+  postgres_data:
