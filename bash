@@ -4,3 +4,4 @@ docker compose up -d
 docker ps
 docker compose up -d
 ctest
+./BankCoreCPP
