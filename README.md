@@ -166,3 +166,35 @@ WHERE account_id = 10002;
 INSERT INTO transactions(...);
 
 COMMIT;
+# BankCoreCPP
+
+Simplified Core Banking System written in C++20.
+
+## Features
+
+- Customer management
+- Account management
+- Money transfers
+- PostgreSQL integration
+- Transaction history
+- Audit logging
+- Docker support
+- Unit testing with GoogleTest
+
+## Technology Stack
+
+- C++20
+- PostgreSQL
+- libpqxx
+- Docker
+- GoogleTest
+- CMake
+
+## Build
+
+```bash
+mkdir build
+cd build
+
+cmake ..
+make
