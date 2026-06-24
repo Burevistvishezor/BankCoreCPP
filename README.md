@@ -1,19 +1,15 @@
 # BankCoreCPP
-# BankCoreCPP
 
-A simplified Core Banking System written in C++20 and PostgreSQL.
+BankCoreCPP is a console banking system written in C++20 with PostgreSQL support.
 
 ## Features
 
-* Customer management
-* Account creation and closure
-* Deposit and withdrawal operations
+* User registration and authentication
+* Creating bank accounts
+* Depositing and withdrawing money
 * Money transfers between accounts
-* Transaction history
-* ACID database transactions
-* Authentication and authorization
-* Audit logging
-* Multi-threaded transaction processing
+* Transaction history storage
+* PostgreSQL database integration
 
 ## Technologies
 
@@ -22,179 +18,46 @@ A simplified Core Banking System written in C++20 and PostgreSQL.
 * libpqxx
 * CMake
 * Git
-* Linux
-* Docker
-* GoogleTest
 
 ## Project Structure
 
-BankCoreCPP/
+src/ - source code
 
-├── CMakeLists.txt
+include/ - header files
 
-├── README.md
+database/ - database layer
 
-├── src/
-
-│   ├── main.cpp
-
-│   ├── BankSystem.cpp
-
-│   ├── AccountService.cpp
-
-│   ├── CustomerService.cpp
-
-│   ├── TransferService.cpp
-
-│   ├── AuthService.cpp
-
-│   └── Database.cpp
-
-├── include/
-
-│   ├── Account.h
-
-│   ├── Customer.h
-
-│   ├── Transaction.h
-
-│   └── Database.h
-
-├── database/
-
-│   └── schema.sql
-
-├── tests/
-
-│   └── account_tests.cpp
-
-├── docs/
-
-│   └── architecture.md
-
-└── docker/
-
-```
-└── docker-compose.yml
-```
-
-## Database Tables
-
-### customers
-
-* customer_id
-* first_name
-* last_name
-* passport_number
-* created_at
-
-### accounts
-
-* account_id
-* customer_id
-* balance
-* currency
-* status
-
-### transactions
-
-* transaction_id
-* from_account
-* to_account
-* amount
-* operation_type
-* created_at
-
-### audit_log
-
-* id
-* user_name
-* operation
-* event_time
-
-## Supported Operations
-
-1. Create customer.
-2. Open account.
-3. Deposit money.
-4. Withdraw money.
-5. Transfer money.
-6. Print account statement.
-7. View transaction history.
-8. Close account.
-
-Example:
-
-1 - Create customer
-
-2 - Open account
-
-3 - Deposit
-
-4 - Withdraw
-
-5 - Transfer
-
-6 - Show balance
-
-7 - Transaction history
-
-8 - Exit
-
-## Example Transfer
-
-Source account: 10001
-
-Destination account: 10002
-
-Amount: 500 EUR
-
-Transfer completed successfully.
-
-## Example SQL Transaction
-
-BEGIN;
-
-UPDATE accounts
-SET balance = balance - 500
-WHERE account_id = 10001;
-
-UPDATE accounts
-SET balance = balance + 500
-WHERE account_id = 10002;
-
-INSERT INTO transactions(...);
-
-COMMIT;
-# BankCoreCPP
-
-Simplified Core Banking System written in C++20.
-
-## Features
-
-- Customer management
-- Account management
-- Money transfers
-- PostgreSQL integration
-- Transaction history
-- Audit logging
-- Docker support
-- Unit testing with GoogleTest
-
-## Technology Stack
-
-- C++20
-- PostgreSQL
-- libpqxx
-- Docker
-- GoogleTest
-- CMake
+services/ - business logic
 
 ## Build
 
 ```bash
+git clone https://github.com/Burevistvishezor/BankCoreCPP.git
+cd BankCoreCPP
+
 mkdir build
 cd build
 
 cmake ..
-make
+cmake --build .
+```
+
+## Database
+
+Create the database and execute:
+
+```sql
+psql -U postgres -d bankdb -f schema.sql
+```
+
+## Future Improvements
+
+* Unit tests (GoogleTest)
+* REST API
+* Docker support
+* CI/CD with GitHub Actions
+
+## Author
+
+Kamil Aliev
+C++ / Python Backend Developer
