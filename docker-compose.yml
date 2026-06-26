@@ -1,0 +1,36 @@
+version: '3.8'
+
+services:
+  # Сервис базы данных
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: bank_postgres
+    environment:
+      POSTGRES_USER: bank_user
+      POSTGRES_PASSWORD: bank_password
+      POSTGRES_DB: bank_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U bank_user -d bank_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Сервис вашего приложения на C++
+  app:
+    build: .
+    container_name: bank_core_app
+    depends_on:
+      postgres_db:
+        condition: service_healthy # Приложение запустится ТОЛЬКО после того, как БД будет полностью готова принимать подключения
+    environment:
+      # Передаем строку подключения через переменные окружения, чтобы код знал, где искать БД внутри сети Docker
+      DB_CONNECTION: "host=postgres_db port=5432 dbname=bank_db user=bank_user password=bank_password"
+    stdin_open: true # Включает поддержку интерактивного ввода (для консольного меню)
+    tty: true        # Включает симуляцию терминала, чтобы вы могли управлять меню
+
+volumes:
+  pgdata:
