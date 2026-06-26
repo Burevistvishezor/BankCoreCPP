@@ -5,3 +5,5 @@ docker ps
 docker compose up -d
 ctest
 ./BankCoreCPP
+docker-compose up --build
+docker attach bank_core_app
